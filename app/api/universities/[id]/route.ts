@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getServiceSupabase } from '@/lib/supabase';
 import { getUser } from '@/lib/auth';
 import { calculateMatchScore } from '@/lib/scoring';
 
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function GET(request: Request, { params }: { params: { id: string } }) {
     try {
+        const supabase = getServiceSupabase();
         const id = parseInt(params.id);
 
         const { data: university, error } = await supabase

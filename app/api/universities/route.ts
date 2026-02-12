@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getServiceSupabase } from '@/lib/supabase';
 import { getUser } from '@/lib/auth';
 import { calculateMatchScore } from '@/lib/scoring';
 
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function GET(request: Request) {
     try {
+        const supabase = getServiceSupabase();
         const { searchParams } = new URL(request.url);
         const country = searchParams.get('country');
         const maxCost = searchParams.get('maxCost');

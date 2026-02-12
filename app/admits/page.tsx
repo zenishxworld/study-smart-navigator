@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -12,11 +12,7 @@ export default function AdmitsPage() {
     const [filterCountry, setFilterCountry] = useState('');
     const [filterType, setFilterType] = useState('');
 
-    useEffect(() => {
-        fetchAdmits();
-    }, [filterCountry, filterType]);
-
-    const fetchAdmits = async () => {
+    const fetchAdmits = useCallback(async () => {
         try {
             const params = new URLSearchParams();
             if (filterCountry) params.set('country', filterCountry);
@@ -30,7 +26,11 @@ export default function AdmitsPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [filterCountry, filterType]);
+
+    useEffect(() => {
+        fetchAdmits();
+    }, [fetchAdmits]);
 
     const countries = ['USA', 'UK', 'Canada', 'Australia', 'Germany', 'Singapore'];
 
@@ -97,8 +97,8 @@ export default function AdmitsPage() {
                                             <p className="text-sm text-secondary-500">{admit.university_country}</p>
                                         </div>
                                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${admit.admit_type === 'admit' ? 'bg-green-100 text-green-700' :
-                                                admit.admit_type === 'reject' ? 'bg-red-100 text-red-700' :
-                                                    'bg-yellow-100 text-yellow-700'
+                                            admit.admit_type === 'reject' ? 'bg-red-100 text-red-700' :
+                                                'bg-yellow-100 text-yellow-700'
                                             }`}>
                                             {admit.admit_type === 'admit' ? '✅ Admitted' :
                                                 admit.admit_type === 'reject' ? '❌ Rejected' : '⏳ Waitlisted'}

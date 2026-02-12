@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabase, getServiceSupabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
     try {
@@ -9,11 +9,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
         }
 
-        const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-        );
-
+        const supabase = getSupabase();
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
         if (error) {
@@ -21,11 +17,7 @@ export async function POST(request: Request) {
         }
 
         // Fetch profile
-        const serviceClient = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.SUPABASE_SERVICE_ROLE_KEY!
-        );
-
+        const serviceClient = getServiceSupabase();
         const { data: profile } = await serviceClient
             .from('profiles')
             .select('*')
