@@ -9,9 +9,9 @@ export default function Disclaimer() {
                 <div className="container-custom max-w-4xl">
                     <h1 className="text-4xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Important Disclaimer</h1>
 
-                    <div className="bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-400 rounded-lg p-8 mb-8">
-                        <h2 className="text-2xl font-bold text-yellow-900 dark:text-yellow-300 mb-4">⚠️ Please Read Carefully</h2>
-                        <p className="text-yellow-800 dark:text-yellow-200 text-lg">
+                    <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8 mb-8">
+                        <h2 className="text-2xl font-bold text-yellow-900 mb-4">⚠️ Please Read Carefully</h2>
+                        <p className="text-yellow-800 text-lg">
                             This platform provides educational information and decision-making tools. It is NOT a substitute for professional advice or official university communications.
                         </p>
                     </div>
