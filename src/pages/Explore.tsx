@@ -4,7 +4,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getAllUniversities, getUniversitiesByCountry, getAvailableCountries, searchUniversities } from '@/lib/universityData';
 import type { University, CountryInfo } from '@/lib/universityData';
-import { Globe, Search, X } from 'lucide-react';
+import { Globe, Search, X, ArrowUpDown } from 'lucide-react';
+
+type SortOption = 'rank' | 'tuition-asc' | 'tuition-desc' | 'salary-desc' | 'visa-risk';
+
+function parseINR(val: string): number {
+    const match = val.replace(/[₹,\s]/g, '').match(/[\d.]+/);
+    return match ? parseFloat(match[0]) : 0;
+}
+
+const visaRiskOrder: Record<string, number> = { low: 1, medium: 2, high: 3 };
 
 export default function Explore() {
     const navigate = useNavigate();
@@ -14,6 +23,7 @@ export default function Explore() {
     const [search, setSearch] = useState('');
     const [greFilter, setGreFilter] = useState('');
     const [visaFilter, setVisaFilter] = useState('');
+    const [sortBy, setSortBy] = useState<SortOption>('rank');
     const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
     const resultsRef = useRef<HTMLDivElement>(null);
@@ -43,6 +53,14 @@ export default function Explore() {
         if (!search) return true;
         const q = search.toLowerCase();
         return u.university_name.toLowerCase().includes(q) || u.city.toLowerCase().includes(q) || u.popular_english_programs.some(p => p.toLowerCase().includes(q));
+    }).sort((a, b) => {
+        switch (sortBy) {
+            case 'tuition-asc': return parseINR(a.annual_tuition_fee_inr) - parseINR(b.annual_tuition_fee_inr);
+            case 'tuition-desc': return parseINR(b.annual_tuition_fee_inr) - parseINR(a.annual_tuition_fee_inr);
+            case 'salary-desc': return parseINR(b.avg_starting_salary_inr) - parseINR(a.avg_starting_salary_inr);
+            case 'visa-risk': return (visaRiskOrder[a.visa_risk.toLowerCase()] || 9) - (visaRiskOrder[b.visa_risk.toLowerCase()] || 9);
+            default: return a.rank - b.rank;
+        }
     });
 
     const getVisaColor = (risk: string) => {
@@ -68,6 +86,7 @@ export default function Explore() {
         setSelectedCountry(null);
         setGreFilter('');
         setVisaFilter('');
+        setSortBy('rank');
     };
 
     const hasActiveFilters = search || selectedCountry || greFilter || visaFilter;
@@ -145,7 +164,19 @@ export default function Explore() {
                                 <option value="low">Low Risk</option>
                                 <option value="medium">Medium Risk</option>
                             </select>
-                            {/* Grid/Table toggle */}
+                            <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-all duration-300 hover:shadow-card"
+                                style={{ backgroundColor: 'var(--glass-bg)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
+                                <ArrowUpDown className="w-3.5 h-3.5 text-primary-500 flex-shrink-0" />
+                                <select value={sortBy} onChange={(e) => setSortBy(e.target.value as SortOption)}
+                                    className="bg-transparent text-sm focus:outline-none cursor-pointer"
+                                    style={{ color: 'var(--text-secondary)' }}>
+                                    <option value="rank">Rank</option>
+                                    <option value="tuition-asc">Tuition: Low → High</option>
+                                    <option value="tuition-desc">Tuition: High → Low</option>
+                                    <option value="salary-desc">Salary: Highest</option>
+                                    <option value="visa-risk">Visa: Safest</option>
+                                </select>
+                            </div>
                             <div className="hidden md:flex rounded-lg overflow-hidden ml-auto" style={{ border: '1px solid var(--border-color)' }}>
                                 <button onClick={() => setViewMode('grid')} className={`p-2 transition-all duration-300 ${viewMode === 'grid' ? 'text-white' : 'hover:opacity-80'}`}
                                     style={viewMode === 'grid' ? { background: 'linear-gradient(135deg, #4f46e5, #14b8a6)' } : { backgroundColor: 'var(--glass-bg)', color: 'var(--text-secondary)' }}>
