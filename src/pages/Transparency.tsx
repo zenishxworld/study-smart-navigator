@@ -15,8 +15,8 @@ export default function Transparency() {
 
                     <div className="card mb-8">
                         <div className="flex items-start space-x-4">
-                            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
@@ -75,9 +75,9 @@ export default function Transparency() {
                         <p className="mt-4 text-sm italic" style={{ color: 'var(--text-tertiary)' }}>Data is updated quarterly. If you notice outdated information, please contact us.</p>
                     </div>
 
-                    <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 p-6">
-                        <h3 className="text-lg font-bold text-yellow-900 dark:text-yellow-300 mb-2">Important Disclaimer</h3>
-                        <ul className="space-y-2 text-yellow-800 dark:text-yellow-200 text-sm">
+                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6">
+                        <h3 className="text-lg font-bold text-yellow-900 mb-2">Important Disclaimer</h3>
+                        <ul className="space-y-2 text-yellow-800 text-sm">
                             <li className="flex items-start"><span className="mr-2">⚠️</span><span>Salary and ROI projections are <strong>estimates</strong> based on historical data and market trends. Actual outcomes vary.</span></li>
                             <li className="flex items-start"><span className="mr-2">⚠️</span><span>Match scores are guidance tools, not admission guarantees. Always verify data with official university sources.</span></li>
                             <li className="flex items-start"><span className="mr-2">⚠️</span><span>Visa policies change frequently. Consult official immigration websites for current information.</span></li>

@@ -191,21 +191,21 @@ function ROICard({ name, subtitle, roi, formatINR }: { name: string; subtitle?: 
             <h2 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{name}</h2>
             {subtitle && <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>{subtitle}</p>}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6">
-                <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 text-center">
-                    <p className="text-xs text-red-600 dark:text-red-400 mb-1">Total Investment</p>
-                    <p className="text-xl font-bold text-red-700 dark:text-red-300">{formatINR(roi.totalCost)}</p>
+                <div className="bg-red-50 rounded-lg p-4 text-center">
+                    <p className="text-xs text-red-600 mb-1">Total Investment</p>
+                    <p className="text-xl font-bold text-red-700">{formatINR(roi.totalCost)}</p>
                 </div>
-                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 text-center">
-                    <p className="text-xs text-green-600 dark:text-green-400 mb-1">After-Tax Salary</p>
-                    <p className="text-xl font-bold text-green-700 dark:text-green-300">{formatINR(roi.afterTaxSalary)}/yr</p>
+                <div className="bg-green-50 rounded-lg p-4 text-center">
+                    <p className="text-xs text-green-600 mb-1">After-Tax Salary</p>
+                    <p className="text-xl font-bold text-green-700">{formatINR(roi.afterTaxSalary)}/yr</p>
                 </div>
-                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 text-center">
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Break-Even</p>
-                    <p className="text-xl font-bold text-blue-700 dark:text-blue-300">{roi.breakEvenYears} years</p>
+                <div className="bg-blue-50 rounded-lg p-4 text-center">
+                    <p className="text-xs text-blue-600 mb-1">Break-Even</p>
+                    <p className="text-xl font-bold text-blue-700">{roi.breakEvenYears} years</p>
                 </div>
-                <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 text-center">
-                    <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">5-Year Net Gain</p>
-                    <p className={`text-xl font-bold ${roi.fiveYearNetGain >= 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>{formatINR(roi.fiveYearNetGain)}</p>
+                <div className="bg-purple-50 rounded-lg p-4 text-center">
+                    <p className="text-xs text-purple-600 mb-1">5-Year Net Gain</p>
+                    <p className={`text-xl font-bold ${roi.fiveYearNetGain >= 0 ? 'text-green-700' : 'text-red-700'}`}>{formatINR(roi.fiveYearNetGain)}</p>
                 </div>
             </div>
             <h3 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>5-Year Projection</h3>

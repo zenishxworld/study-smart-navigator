@@ -18,7 +18,7 @@ export default function HeroSection() {
         <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
             {/* Animated gradient background */}
             <div className="absolute inset-0 bg-mesh" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] opacity-40 dark:opacity-20 pointer-events-none"
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] opacity-40 pointer-events-none"
                 style={{ background: 'radial-gradient(ellipse at center, hsla(245, 80%, 60%, 0.15) 0%, transparent 70%)' }} />
             <div className="absolute top-20 right-[10%] w-72 h-72 rounded-full blur-3xl animate-pulse-soft opacity-30"
                 style={{ background: 'hsla(245, 67%, 55%, 0.2)' }} />
