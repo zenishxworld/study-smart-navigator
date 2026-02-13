@@ -1,35 +1,42 @@
 import { useReveal } from './useReveal';
+import { Coins, Lock, Megaphone } from 'lucide-react';
 
 const problems = [
     {
-        icon: '💰',
+        icon: Coins,
         title: 'Commission Bias',
         description: 'Most platforms recommend universities that pay them — not what\'s best for you.',
         accent: 'hsla(0, 80%, 55%, 0.08)',
         accentBorder: 'hsla(0, 80%, 55%, 0.18)',
+        iconColor: 'text-red-500',
     },
     {
-        icon: '🔒',
+        icon: Lock,
         title: 'Hidden Costs',
         description: 'Students spend ₹40–60L without clear ROI projections or financial clarity.',
         accent: 'hsla(35, 95%, 52%, 0.08)',
         accentBorder: 'hsla(35, 95%, 52%, 0.18)',
+        iconColor: 'text-amber-500',
     },
     {
-        icon: '📢',
+        icon: Megaphone,
         title: 'Sales-Driven Advice',
         description: 'Consultants push "safe" colleges instead of optimal ones for your career.',
         accent: 'hsla(262, 80%, 55%, 0.08)',
         accentBorder: 'hsla(262, 80%, 55%, 0.18)',
+        iconColor: 'text-primary-500',
     },
 ];
 
-function ProblemCard({ icon, title, description, accent, accentBorder }: typeof problems[0]) {
+function ProblemCard({ icon: Icon, title, description, accent, accentBorder, iconColor }: typeof problems[0]) {
     const ref = useReveal();
     return (
-        <div ref={ref} className="reveal group rounded-2xl p-7 transition-all duration-500 hover:-translate-y-1"
+        <div ref={ref} className="reveal group rounded-2xl p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-card-hover"
             style={{ backgroundColor: accent, border: `1px solid ${accentBorder}` }}>
-            <span className="text-3xl block mb-4">{icon}</span>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                style={{ backgroundColor: 'var(--glass-bg)', border: `1px solid ${accentBorder}` }}>
+                <Icon className={`w-6 h-6 ${iconColor}`} />
+            </div>
             <h3 className="text-lg font-bold mb-2 tracking-tight" style={{ color: 'var(--text-primary)' }}>{title}</h3>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{description}</p>
         </div>

@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom';
 import { useReveal, useCounter } from './useReveal';
+import { ShieldCheck, BarChart3, Search } from 'lucide-react';
 
 function StatBadge({ end, suffix, label }: { end: number; suffix: string; label: string }) {
     const { ref, displayValue } = useCounter(end, 2000, suffix);
     return (
-        <div ref={ref} className="flex items-center gap-2 px-4 py-2 rounded-full glass" style={{ border: '1px solid var(--border-color)' }}>
+        <div ref={ref} className="flex items-center gap-2 px-4 py-2 rounded-full glass transition-all duration-300 hover:shadow-card hover:scale-105" style={{ border: '1px solid var(--border-color)' }}>
             <span className="text-lg font-bold text-gradient">{displayValue}</span>
             <span className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{label}</span>
         </div>
     );
 }
+
+const trustBadges = [
+    { icon: ShieldCheck, text: '0% Commission' },
+    { icon: BarChart3, text: 'Data-Driven Rankings' },
+    { icon: Search, text: 'Transparent Methodology' },
+];
 
 export default function HeroSection() {
     const ref = useReveal();
@@ -58,14 +65,10 @@ export default function HeroSection() {
 
                         {/* Trust Badges */}
                         <div className="flex flex-wrap gap-3">
-                            {[
-                                { icon: '🛡️', text: '0% Commission' },
-                                { icon: '📊', text: 'Data-Driven Rankings' },
-                                { icon: '🔍', text: 'Transparent Methodology' },
-                            ].map(badge => (
-                                <div key={badge.text} className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
+                            {trustBadges.map(badge => (
+                                <div key={badge.text} className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 hover:shadow-card hover:scale-[1.03]"
                                     style={{ backgroundColor: 'var(--section-alt-bg)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
-                                    <span>{badge.icon}</span>
+                                    <badge.icon className="w-3.5 h-3.5 text-primary-500" />
                                     {badge.text}
                                 </div>
                             ))}

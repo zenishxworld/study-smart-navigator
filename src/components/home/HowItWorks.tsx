@@ -1,19 +1,20 @@
 import { useReveal } from './useReveal';
+import { ClipboardEdit, Search, Target } from 'lucide-react';
 
 const steps = [
-    { num: '01', title: 'Enter Your Profile', desc: 'Add your CGPA, test scores, budget, and preferences.', icon: '📝' },
-    { num: '02', title: 'Compare Universities', desc: 'Get ranked matches with transparent scoring breakdowns.', icon: '🔍' },
-    { num: '03', title: 'Choose Based on ROI & Fit', desc: 'Make decisions backed by data, not sales pitches.', icon: '🎯' },
+    { num: '01', title: 'Enter Your Profile', desc: 'Add your CGPA, test scores, budget, and preferences.', icon: ClipboardEdit },
+    { num: '02', title: 'Compare Universities', desc: 'Get ranked matches with transparent scoring breakdowns.', icon: Search },
+    { num: '03', title: 'Choose Based on ROI & Fit', desc: 'Make decisions backed by data, not sales pitches.', icon: Target },
 ];
 
-function StepCard({ num, title, desc, icon }: typeof steps[0]) {
+function StepCard({ num, title, desc, icon: Icon }: { num: string; title: string; desc: string; icon: React.ElementType }) {
     const ref = useReveal();
     return (
-        <div ref={ref} className="reveal text-center relative">
+        <div ref={ref} className="reveal text-center relative group">
             <div className="relative mb-5 mx-auto">
-                <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center shadow-card transition-all duration-300 hover:shadow-glow hover:scale-105"
+                <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center shadow-card transition-all duration-300 group-hover:shadow-glow group-hover:scale-110 group-hover:-translate-y-1"
                     style={{ background: 'linear-gradient(135deg, hsla(262, 80%, 55%, 0.12), hsla(200, 90%, 50%, 0.08))', border: '1px solid var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
-                    <span className="text-2xl">{icon}</span>
+                    <Icon className="w-7 h-7 text-primary-600 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                     style={{ background: 'linear-gradient(135deg, hsla(262, 80%, 55%, 1), hsla(200, 90%, 50%, 1))' }}>

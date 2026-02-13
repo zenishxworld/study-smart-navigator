@@ -1,4 +1,5 @@
 import { useReveal, useCounter } from './useReveal';
+import { Search, Ban, Wallet, Crosshair } from 'lucide-react';
 
 function AnimatedStat({ end, suffix, label }: { end: number; suffix: string; label: string }) {
     const { ref, displayValue } = useCounter(end, 2200, suffix);
@@ -11,10 +12,10 @@ function AnimatedStat({ end, suffix, label }: { end: number; suffix: string; lab
 }
 
 const reasons = [
-    { icon: '🔍', text: 'Transparent scoring logic' },
-    { icon: '🚫', text: 'No hidden incentives' },
-    { icon: '💰', text: 'Financial-first thinking' },
-    { icon: '🎯', text: 'Built for serious applicants' },
+    { icon: Search, text: 'Transparent scoring logic' },
+    { icon: Ban, text: 'No hidden incentives' },
+    { icon: Wallet, text: 'Financial-first thinking' },
+    { icon: Crosshair, text: 'Built for serious applicants' },
 ];
 
 export default function TrustSection() {
@@ -34,10 +35,10 @@ export default function TrustSection() {
 
                 <div ref={gridRef} className="reveal grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-16">
                     {reasons.map(reason => (
-                        <div key={reason.text} className="text-center group">
-                            <div className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                        <div key={reason.text} className="text-center group cursor-default">
+                            <div className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-card group-hover:-translate-y-1"
                                 style={{ backgroundColor: 'var(--section-alt-bg)', border: '1px solid var(--border-color)' }}>
-                                <span className="text-xl">{reason.icon}</span>
+                                <reason.icon className="w-5 h-5 text-primary-500 transition-colors duration-300 group-hover:text-primary-600" />
                             </div>
                             <p className="text-xs font-medium leading-snug" style={{ color: 'var(--text-secondary)' }}>{reason.text}</p>
                         </div>
